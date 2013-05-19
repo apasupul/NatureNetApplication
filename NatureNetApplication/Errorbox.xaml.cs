@@ -28,7 +28,6 @@ namespace NatureNetApplication
         {
             InitializeComponent();
             generalmessages.Text = generalmsg;
-            //generalmessages.te
             Errormessages.Text = errormessages;
             generalError.Text = generealerrormessages;
             

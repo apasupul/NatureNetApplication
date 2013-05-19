@@ -53,10 +53,8 @@ namespace NatureNetApplication
                 String[] myListItemArray = new String[Images_drop_window.Items.Count];
                 Images_drop_window.Items.CopyTo(myListItemArray, 0);
                 foreach (String myItem in myListItemArray)
-                { 
+                {
                 }
-               // SurfaceWindow1.tW1._lo
-               // SurfaceWindow1.tW1.Tagloadbox.Items.Add(Tag_box_Content.Text);
             }
 
         }
@@ -64,12 +62,12 @@ namespace NatureNetApplication
         {
             e.Effects = DragDropEffects.Move;
             object neededdata = e.Cursor.Data;
-        
-         
+
+
             Content test = e.Cursor.Data as Content;
-           
+
             FrameworkElement findSource = e.OriginalSource as FrameworkElement;
-           
+
             SurfaceDragCursor droppingCursor = e.Cursor;
             if (Names == null)
             {
@@ -84,7 +82,7 @@ namespace NatureNetApplication
             Images_drop_window.Items.Add(test.p.ToString());
             //Images_drop_window.ItemsSource = names;
             e.Handled = true;
-           
+
 
         }
 
@@ -95,7 +93,7 @@ namespace NatureNetApplication
 
         private void surfaceButton2_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
     }
 }

@@ -13,7 +13,7 @@
   <Grid>
         
             <Controls:DragDropScatterView x:Name="Myscatterview">
-            <s:ScatterViewItem x:Name="test" Height="800" Width="800" ZIndex="0" Center="390,390" Orientation="0"  BorderBrush="Brown" BorderThickness="10" CanMove="False" CanRotate="False" CanScale="True" Tag="off,testing">
+            <s:ScatterViewItem AllowDrop="False" x:Name="test" Height="800" Width="800" ZIndex="0" Center="390,390" Orientation="0"  BorderBrush="Brown" BorderThickness="10" CanMove="False" CanRotate="False" CanScale="False" Tag="off,testing">
                 <Grid>
                     <!--<Grid.ColumnDefinitions>
                         <ColumnDefinition Width="712*" />
@@ -30,7 +30,7 @@
                        
                     </s:SurfaceButton>
                     <s:SurfaceButton x:Name="togglemap" Margin="434,736,183,0" Panel.ZIndex="1" Content="Toggle Map mode" Click="togglemap_Click"/>
-                    <s:SurfaceButton Margin="599,736,0,0" Content="DROP PIN"  Click="surfaceButton2_Click" Tag="isdisabled"  BorderThickness="20" Height="41" Panel.ZIndex="1" HorizontalAlignment="Left"  x:Name="Drop_controler" VerticalAlignment="Top" Width="106" />
+                    <s:SurfaceButton Margin="599,736,0,0" Content="DROP PIN"  Click="Drop_pin" Tag="isdisabled"  BorderThickness="20" Height="41" Panel.ZIndex="1" HorizontalAlignment="Left"  x:Name="Drop_controler" VerticalAlignment="Top" Width="106" />
                     <m:Map Grid.Row="0" Grid.Column="0" x:Name="mymap" TouchDown="mymap_TouchDown" IsHitTestVisible="True" Mode="Aerial"  CredentialsProvider="Amnk4y9u0UOqAqBBancmP4PkvqjAM93RUukhH-6yNEWi8WsWxT3xjyE-aKTNAXXD" Center="38.771317,-76.711307" Grid.RowSpan="3" Grid.ColumnSpan="2">
 
             <m:MapLayer IsHitTestVisible="True"  x:Name="mainlayer">

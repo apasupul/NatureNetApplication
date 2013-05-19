@@ -42,28 +42,26 @@ namespace NatureNetApplication
             }
         }
 
-        
+
         public Image_View_Window()
         {
-            
+
             InitializeComponent();
-           // Image_View_Window.DataContextProperty = this;
             Images_LibraryItems.ItemsSource = Names;
-            //Images_LibraryItems.ItemsSource = 
         }
 
         public Image_View_Window(string item)
         {
             InitializeComponent();
             Databox.DataContext = this;
-          //  Images_LibraryItems.ItemsSource = Names;
+
             DragDrop.AddDropHandler(this, oncursordrop);
-             this.item = item;
+            this.item = item;
             label1.Content = item;
-            // TODO: Complete member initialization
+
             List<string> photos = new List<string>();
             SqlCeConnection conn = null;
-             string query = "SELECT Image_Database.Image_location FROM Image_Map_to_Tags INNER JOIN Image_Database ON Image_Map_to_Tags.Image_tag_name = Image_Database.Image_name AND Image_Map_to_Tags.image_tag LIKE '"+item+"'";
+            string query = "SELECT Image_Database.Image_location FROM Image_Map_to_Tags INNER JOIN Image_Database ON Image_Map_to_Tags.Image_tag_name = Image_Database.Image_name AND Image_Map_to_Tags.image_tag LIKE '" + item + "'";
             string filesPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NatureNetDataBase_Main.sdf");
             string connectionString = string.Format("Data Source=" + filesPath);
             conn = new SqlCeConnection(connectionString);
@@ -82,93 +80,22 @@ namespace NatureNetApplication
                 }
             }
             conn.Close();
-            //ObservableCollection<string> items = new ObservableCollection<string>();
-            //foreach (string s in Course)
-            //{
-            //    items.Add(s);
-             Images_LibraryItems.DataContext = this;
-            //}
+
+            Images_LibraryItems.DataContext = this;
+
             foreach (string s in Names)
             {
+
                 Images_LibraryItems.Items.Add(s);
             }
-           
-           // Images_LibraryItems.ItemsSource = Names;
+
+
             if (Names.Count == 0)
             {
                 surfaceButton5.Visibility = Visibility.Visible;
             }
-            //using (SqlConnection cn = new SqlConnection(connectionString))
-            //{
-            //    using (SqlCommand cm = new SqlCommand(query, cn))
-            //    {
-            //        cn.Open();
-            //        SqlDataReader reader = cm.ExecuteReader();
-            //        while (reader.Read())
-            //        {
-            //            Course.Add(reader.GetString(0));
-            //        }
-            //    }
-            //}
-           
-            
+
         }
-        //public Image_View_Window(string item,int setter)
-        //{
-        //    InitializeComponent();
-        //    Images_LibraryItems.ItemsSource = Names;
-        //    surfaceButton5.Visibility = Visibility.Visible;
-        //    this.item = item;
-        //    label1.Content = item;
-        //    // TODO: Complete member initialization
-        //    List<string> photos = new List<string>();
-        //    SqlCeConnection conn = null;
-        //    string query = "SELECT Image_Database.Image_location FROM Image_Map_to_Tags INNER JOIN Image_Database ON Image_Map_to_Tags.Image_tag_name = Image_Database.Image_name AND Image_Map_to_Tags.image_tag LIKE '" + item + "'";
-        //    string filesPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NatureNetDataBase_Main.sdf");
-        //    string connectionString = string.Format("Data Source=" + filesPath);
-        //    conn = new SqlCeConnection(connectionString);
-        //    conn.Open();
-        //    SqlCeCommand cmd = conn.CreateCommand();
-        //    cmd.CommandText = query;
-        //    SqlCeDataReader reader = cmd.ExecuteReader();
-        //    while (reader.Read())
-        //    {
-        //        if (File.Exists(reader.GetString(0)))
-        //        {
-        //            if (!Names.Contains(reader.GetString(0)))
-        //            {
-        //                Names.Add(reader.GetString(0));
-        //            }
-        //        }
-        //    }
-        //    conn.Close();
-        //    //ObservableCollection<string> items = new ObservableCollection<string>();
-        //    //foreach (string s in Course)
-        //    //{
-        //    //    items.Add(s);
-
-        //    //}
-        //    foreach (string s in Names)
-        //    {
-
-        //    }
-        //    Images_LibraryItems.DataContext = this;
-        //    Images_LibraryItems.ItemsSource = Names;
-        //    //using (SqlConnection cn = new SqlConnection(connectionString))
-        //    //{
-        //    //    using (SqlCommand cm = new SqlCommand(query, cn))
-        //    //    {
-        //    //        cn.Open();
-        //    //        SqlDataReader reader = cm.ExecuteReader();
-        //    //        while (reader.Read())
-        //    //        {
-        //    //            Course.Add(reader.GetString(0));
-        //    //        }
-        //    //    }
-        //    //}
-
-
-        //}
         private void surfaceButton1_Click(object sender, RoutedEventArgs e)
         {
             surfaceButton1.Tag = "Enabled";
@@ -178,9 +105,10 @@ namespace NatureNetApplication
             ContributionBox.Visibility = System.Windows.Visibility.Visible;
             surfaceButton3.Visibility = System.Windows.Visibility.Visible;
             ContributionBox.Text = "Please enter Bio-Diversity-Data";
-            surfaceButton1.BorderThickness = new Thickness( 10);
+            surfaceButton1.BorderThickness = new Thickness(10);
             surfaceButton1.BorderBrush = Brushes.Black;
             surfaceButton2.BorderBrush = null;
+            Databox.Visibility = Visibility.Visible;
             Databox.Items.Clear();
             SqlCeConnection conn = null;
 
@@ -189,12 +117,15 @@ namespace NatureNetApplication
             conn = new SqlCeConnection(connectionString);
             SqlCeCommand cmd = conn.CreateCommand();
             conn.Open();
-            cmd.CommandText = "SELECT Ideas, Tag_name FROM Data_associated_tags WHERE (Tag_name = N'"+item+"')";
-
+            cmd.CommandText = "SELECT Ideas, Tag_name FROM Data_associated_tags WHERE (Tag_name = N'" + item + "')";
+            Databox.Visibility = Visibility.Visible;
             SqlCeDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                Databox.Items.Add(reader.GetString(0));
+                SurfaceListBoxItem datafromdatabase = new SurfaceListBoxItem();
+                datafromdatabase.Content = reader.GetString(0);
+                datafromdatabase.AllowDrop = false;
+                Databox.Items.Add(datafromdatabase);
             }
             conn.Close();
 
@@ -212,8 +143,9 @@ namespace NatureNetApplication
             ContributionBox.Visibility = System.Windows.Visibility.Visible;
             ContributionBox.Text = "Please enter Design-Ideas";
             surfaceButton3.Visibility = System.Windows.Visibility.Visible;
+            Databox.Visibility = Visibility.Visible;
             Databox.Items.Clear();
-                  SqlCeConnection conn = null;
+            SqlCeConnection conn = null;
 
             string filesPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NatureNetDataBase_Main.sdf");
             string connectionString = string.Format("Data Source=" + filesPath);
@@ -221,22 +153,22 @@ namespace NatureNetApplication
             SqlCeCommand cmd = conn.CreateCommand();
             conn.Open();
             cmd.CommandText = "SELECT Idea_content FROM Ideas";
-            
+
             SqlCeDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 Databox.Items.Add(reader.GetString(0));
             }
             conn.Close();
-            
+
         }
 
         private void surfaceButton3_Click(object sender, RoutedEventArgs e)
         {
-            string datacontext="";
+            string datacontext = "";
             if ((string)(surfaceButton1.Tag.ToString()) == "Enabled")
             {
-               datacontext =  "Bio";
+                datacontext = "Bio";
 
             }
             else
@@ -245,7 +177,7 @@ namespace NatureNetApplication
                 {
                     datacontext = "Design";
                 }
- 
+
             }
 
             if (datacontext == "Bio")
@@ -257,7 +189,7 @@ namespace NatureNetApplication
                 else
                 {
                     SqlCeConnection conn = null;
-
+                    Databox.Visibility = Visibility.Visible;
                     string filesPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NatureNetDataBase_Main.sdf");
                     string connectionString = string.Format("Data Source=" + filesPath);
                     conn = new SqlCeConnection(connectionString);
@@ -281,7 +213,7 @@ namespace NatureNetApplication
                     if (datacontext == "Design")
                     {
                         SqlCeConnection conn = null;
-
+                        Databox.Visibility = Visibility.Visible;
                         string filesPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NatureNetDataBase_Main.sdf");
                         string connectionString = string.Format("Data Source=" + filesPath);
                         conn = new SqlCeConnection(connectionString);
@@ -292,11 +224,11 @@ namespace NatureNetApplication
                         cmd.ExecuteNonQuery();
                         conn.Close();
                         ContributionBox.Text = "The data has been saved";
-                       
+
                     }
                 }
 
-            
+
         }
 
         private void surfaceButton4_Click(object sender, RoutedEventArgs e)
@@ -315,7 +247,7 @@ namespace NatureNetApplication
 
         private void Images_LibraryItems_DragCompleted(object sender, Microsoft.Surface.Presentation.SurfaceDragCompletedEventArgs e)
         {
-
+            string tester = "sldfkhjd";
         }
 
         private void Images_LibraryItems_StackSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -326,7 +258,7 @@ namespace NatureNetApplication
         private void surfaceButton5_Click(object sender, RoutedEventArgs e)
         {
             SqlCeConnection conn = null;
-                        string filesPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NatureNetDataBase_Main.sdf");
+            string filesPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NatureNetDataBase_Main.sdf");
             string connectionString = string.Format("Data Source=" + filesPath);
             conn = new SqlCeConnection(connectionString);
             SqlCeCommand cmd = conn.CreateCommand();
@@ -349,23 +281,86 @@ namespace NatureNetApplication
                 foreach (string s in Names)
                 {
                     conn.Open();
-                   string result= System.IO.Path.GetFileName(s);
-                   cmd.CommandText = "INSERT INTO Image_Map_to_Tags (Image_tag_name, image_tag) VALUES ('" + result + "', '"+label1.Content.ToString()+"')";
-                   cmd.ExecuteScalar();
-                   conn.Close();
-                   Databox.Items.Clear();
-                   Databox.Items.Add("Photos saved");
+                    string result = System.IO.Path.GetFileName(s);
+                    cmd.CommandText = "INSERT INTO Image_Map_to_Tags (Image_tag_name, image_tag) VALUES ('" + result + "', '" + label1.Content.ToString() + "')";
+                    cmd.ExecuteScalar();
+                    conn.Close();
+                    Databox.Items.Clear();
+                    SurfaceListBoxItem messageitem = new SurfaceListBoxItem();
+                    messageitem.Content = "Photos saved";
+                    messageitem.AllowDrop = false;
+                    Databox.Items.Add(messageitem);
                 }
-                
- 
+
+
             }
 
 
         }
 
         public void oncursordrop(object sender, DragEventArgs args)
-        { 
+        {
 
+        }
+
+        private void Images_LibraryItems_DragEnter(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void Images_LibraryItems_Drop(object sender, Microsoft.Surface.Presentation.SurfaceDragDropEventArgs e)
+        {
+            string test = "scuss";
+        }
+
+        private void Images_LibraryItems_PreviewDragEnter(object sender, DragEventArgs e)
+        {
+            string test = "scuss";
+        }
+
+        private void UserControl_PreviewDragEnter(object sender, DragEventArgs e)
+        {
+            string test = "scuss";
+        }
+
+        private void Images_LibraryItems_DragEnter(object sender, Microsoft.Surface.Presentation.SurfaceDragDropEventArgs e)
+        {
+            if ((e.Cursor.Data as Image_View_Window) is Image_View_Window)
+            {
+                e.Effects = DragDropEffects.None;
+                string test = "scuss";
+            }
+            else
+            {
+                ScatterViewItem menu_test = e.Cursor.Data as ScatterViewItem;
+                if (menu_test != null)
+                {
+                    if (menu_test.Name == "Default_menu")
+                    {
+                        e.Effects = DragDropEffects.None;
+                        string test = "scuss";
+                    }
+
+                }
+
+            }
+
+        }
+
+        private void SurfaceListBoxItem_DragOver(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void Images_LibraryItems_DragLeave(object sender, Microsoft.Surface.Presentation.SurfaceDragDropEventArgs e)
+        {
+            e.Effects = e.Cursor.AllowedEffects;
+
+        }
+
+        private void UserControl_DragCompleted(object sender, Microsoft.Surface.Presentation.SurfaceDragCompletedEventArgs e)
+        {
+            ListBoxItem testewer = new ListBoxItem();
         }
     }
 }
