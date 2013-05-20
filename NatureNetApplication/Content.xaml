@@ -16,7 +16,7 @@
                 <RowDefinition Height="136*" />
                 <RowDefinition Height="102*" />
             </Grid.RowDefinitions>
-            <s:SurfaceButton Grid.Row="0" HorizontalAlignment="Right" Content="Close"  Click="SurfaceButton_Click_1" />
+            <s:SurfaceButton Grid.Row="0" HorizontalAlignment="Right" Content="Close"  Click="Close_window" />
             <TextBlock Grid.Column="0" Grid.Row="0" Background="Transparent" Foreground="White" FontSize="24" 
                        VerticalAlignment="Center" HorizontalAlignment="Left" Height="Auto"><Run Text="{Binding MediaType}"/></TextBlock>
             <Image  Margin="0,0,0,0" x:Name="imagebox"  Grid.Column="0" Grid.Row="1" />

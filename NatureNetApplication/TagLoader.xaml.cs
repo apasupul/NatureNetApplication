@@ -16,6 +16,7 @@ namespace NatureNetApplication
 {
     /// <summary>
     /// Interaction logic for TagLoader.xaml
+    /// currently un used
     /// </summary>
     public partial class TagLoader : UserControl
     {

@@ -16,6 +16,7 @@ namespace NatureNetApplication
 {
     /// <summary>
     /// Interaction logic for Errorbox.xaml
+    /// Cna be used to display any usefull error messages on screen or to catch exeptions accepsts 2 parameters to display
     /// </summary>
     public partial class Errorbox : UserControl
     {

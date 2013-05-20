@@ -76,13 +76,9 @@ namespace NatureNetApplication
         {
             SurfaceDragDrop.AddDropHandler(this, OnCursorDrop);
             AddHandler(ScatterViewItem.ContainerManipulationStartedEvent, new ContainerManipulationStartedEventHandler(OnManipulationStarted));
-            AddHandler(ScatterViewItem.DragEnterEvent, new DragEventHandler(dragenter));
         }
 
-        private void dragenter(object sender, DragEventArgs e)
-        {
-            string test = "cgfhgfh";
-        }
+       
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
             SurfaceDragDrop.RemoveDropHandler(this, OnCursorDrop);
@@ -97,74 +93,24 @@ namespace NatureNetApplication
                 svi.BeginDragDrop(svi.DataContext);
             }
         }
-
+        /// <summary>
+        /// detects a drop event anywhere on the scatterview 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void OnCursorDrop(object sender, SurfaceDragDropEventArgs args)
         {
-            //ThreadStart starter = () => do_ondrop(sender, args);
-            //Thread ondrop = new Thread(starter);
-            //ondrop.Start();
 
             do_ondrop(sender, args);
-            //SurfaceDragCursor droppingCursor = args.Cursor;
-            //// args.Cursor.Effects = DragDropEffects.Copy;
-            //LibraryBar currentbar = args.Cursor.DragSource as LibraryBar;
-            //if (currentbar != null)
-            //{
-            //    currentbar.SetIsItemDataEnabled(args.Cursor.Data, true);
-            //}
-            //// Add dropping Item that was from another drag source.
-            //if (droppingCursor.CurrentTarget == this && droppingCursor.DragSource != this)
-            //{
-            //    if (!Items.Contains(droppingCursor.Data))
-            //    {
-            //        // Items.Add(droppingCursor.Data);
-            //        try
-            //        {
-            //            string[] lastPart = droppingCursor.Data.ToString().Split('.');
-            //            if (lastPart[lastPart.Length - 1] != "jpg")
-            //            {
-            //                return;
-            //            }
-            //        }
-            //        catch (Exception e)
-            //        {
-            //            return;
-
-            //        }
-            //        Content test = new Content(droppingCursor.Data);
-
-            //        Items.Add(test);
-
-            //        var svi = ItemContainerGenerator.ContainerFromItem(test) as ScatterViewItem;
-            //        if (svi != null)
-            //        {
-            //            svi.Style = (Style)Resources["LibraryContainerInScatterViewItemStyle"];
-            //            svi.Center = droppingCursor.GetPosition(this);
-            //            svi.Orientation = droppingCursor.GetOrientation(this);
-            //            svi.Height = 300; //((UserControl)droppingCursor.Data).Height;
-            //            svi.Width = 300;// ((UserControl)droppingCursor.Data).Width;
-            //            svi.MinHeight = 300;
-            //            svi.MinWidth = 300;
-            //            svi.MaxHeight = 1000;
-            //            svi.MaxWidth = 1000;
-            //            svi.DataContext = droppingCursor.Data.ToString();
-            //            svi.Tag = droppingCursor.Data.ToString();
-
-            //            svi.SetRelativeZIndex(RelativeScatterViewZIndex.Topmost);
-            //        }
-            //    }
-            //}
+            
         }
 
         #endregion
-
-
-
-        public void svi_DragEnter(object sender, SurfaceDragDropEventArgs e)
-        {
-
-            string test = "cgfhgfh";
-        }
+        /// <summary>
+        /// if a image is dropped on the scatterview it creats a new image viewig box and restores the drag property of the dragged image 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public void do_ondrop(object sender, SurfaceDragDropEventArgs args)
         
         {

@@ -411,26 +411,33 @@ namespace NatureNetApplication
             }
             conn.Close();
         }
-        private void surfaceButton1_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// click/touch handler for Add new tag button create's a new item with the entered tag name and adds it to the list of collections menu 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Create_tag(object sender, RoutedEventArgs e)
         {
 
             Tagloadbox.Items.Add(New_tag_name.Text.ToString());
             string Template = New_tag_name.Text.ToString();
             New_tag_name.Text = "Tag created";
             SqlCeConnection conn = null;
-
             string filesPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NatureNetDataBase_Main.sdf");
             string connectionString = string.Format("Data Source=" + filesPath);
             conn = new SqlCeConnection(connectionString);
             SqlCeCommand cmd = conn.CreateCommand();
             conn.Open();
             cmd.CommandText = "INSERT INTO Users_login (Username, User_id) VALUES ('" + Template + "', '" + (++_loginnamecounter) + "')";
-
             cmd.ExecuteNonQuery();
             conn.Close();
 
         }
-
+        /// <summary>
+        /// Toggles the map view mode from arieal mode/ road view mode
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void togglemap_Click(object sender, RoutedEventArgs e)
         {
             if (mymap.Mode is AerialMode)
@@ -447,8 +454,12 @@ namespace NatureNetApplication
             }
 
         }
-
-        private void surfaceButton2_Click_1(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Toggles the map size ( minimizes and maximizes it )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Toggle_map_size(object sender, RoutedEventArgs e)
         {
             string[] tagInfo = test.Tag.ToString().Split(',');
 

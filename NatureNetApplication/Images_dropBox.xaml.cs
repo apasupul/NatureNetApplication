@@ -16,6 +16,7 @@ namespace NatureNetApplication
 {
     /// <summary>
     /// Interaction logic for Images_dropBox.xaml
+    /// currently not used 
     /// </summary>
     public partial class Images_dropBox : UserControl
     {

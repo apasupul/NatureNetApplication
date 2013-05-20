@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Name="test" s:SurfaceDragDrop.DragEnter="test_DragEnter" s:SurfaceDragDrop.Drop="test_Drop">
+             d:DesignHeight="300" d:DesignWidth="300" Name="Pushpincontrol" s:SurfaceDragDrop.DragEnter="test_DragEnter" >
     <UserControl.Resources>
         <!-- A template describing the view of each piece of library data -->
         <DataTemplate x:Key="LibraryItemTemplate">
@@ -42,7 +42,7 @@
                 <!--Controls:LibraryContents x:Name="LibraryCont3"/-->
             <!--/s:ScatterViewItem-->
             <!--<s:ScatterViewItem CanMove="False" CanRotate="False" CanScale="False" Canvas.Left="43" Canvas.Top="69" x:Name="Imageholder" Visibility="Hidden" AllowDrop="True"  s:SurfaceDragDrop.Drop="Push_Image_container_Drop" PreviewDragEnter="Imageholder_Drop" DragEnter="Imageholder_DragEnter" >-->
-            <s:LibraryContainer AllowDrop="True"  s:SurfaceDragDrop.Drop="Push_Image_container_Drop_1"  Canvas.Left="57" Canvas.Top="59" Visibility="Hidden" ItemsSource="Binding" x:Name="Push_Image_container"  >
+            <s:LibraryContainer AllowDrop="True"    Canvas.Left="57" Canvas.Top="59" Visibility="Hidden" ItemsSource="Binding" x:Name="Push_Image_container"  >
                     <s:LibraryContainer.StackView >
                         <s:StackView ItemTemplate="{StaticResource ContainerItemTemplate}"   />
                     </s:LibraryContainer.StackView>

@@ -28,6 +28,9 @@ namespace NatureNetApplication
     {
         private string item;
         int local_setter;
+        /// <summary>
+        ///  collections to store list fo images associated with the current tag/collection name
+        /// </summary>
         private ObservableCollection<String> names;
         public ObservableCollection<String> Names
         {
@@ -49,13 +52,16 @@ namespace NatureNetApplication
             InitializeComponent();
             Images_LibraryItems.ItemsSource = Names;
         }
-
+        /// <summary>
+        /// initialize the image_View_window with tagname/collection name 
+        /// </summary>
+        /// <param name="item"></param>
         public Image_View_Window(string item)
         {
             InitializeComponent();
             Databox.DataContext = this;
 
-            DragDrop.AddDropHandler(this, oncursordrop);
+           
             this.item = item;
             label1.Content = item;
 
@@ -96,7 +102,12 @@ namespace NatureNetApplication
             }
 
         }
-        private void surfaceButton1_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// fetches and loads the associated bio diversity data from the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void load_biodiversity_data(object sender, RoutedEventArgs e)
         {
             surfaceButton1.Tag = "Enabled";
             surfaceButton1.Background = Brushes.Red;
@@ -130,8 +141,12 @@ namespace NatureNetApplication
             conn.Close();
 
         }
-
-        private void surfaceButton2_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// fetches and loads the associated design ideas from the datbase 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void load_desig_ideas(object sender, RoutedEventArgs e)
         {
             surfaceButton2.Background = Brushes.Red;
             surfaceButton1.Background = Brushes.Gray;
@@ -162,8 +177,12 @@ namespace NatureNetApplication
             conn.Close();
 
         }
-
-        private void surfaceButton3_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// enters and associates the disign or bio diversity data entered 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void submit_data(object sender, RoutedEventArgs e)
         {
             string datacontext = "";
             if ((string)(surfaceButton1.Tag.ToString()) == "Enabled")
@@ -230,8 +249,12 @@ namespace NatureNetApplication
 
 
         }
-
-        private void surfaceButton4_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// closes the current window 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void close_window(object sender, RoutedEventArgs e)
         {
             DependencyObject parent = VisualTreeHelper.GetParent(this);
             ScatterViewItem svi = null;
@@ -245,17 +268,15 @@ namespace NatureNetApplication
             ((ScatterView)parent).Items.Remove(svi);
         }
 
-        private void Images_LibraryItems_DragCompleted(object sender, Microsoft.Surface.Presentation.SurfaceDragCompletedEventArgs e)
-        {
-            string tester = "sldfkhjd";
-        }
+       
 
-        private void Images_LibraryItems_StackSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Images_LibraryItems.ItemsSource = Names;
-        }
-
-        private void surfaceButton5_Click(object sender, RoutedEventArgs e)
+       
+        /// <summary>
+        /// checks to see if any images have been dragged into teh new collection if yes saves and associates the collection to the tag name/ collection name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void save_image_collection_data(object sender, RoutedEventArgs e)
         {
             SqlCeConnection conn = null;
             string filesPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NatureNetDataBase_Main.sdf");
@@ -298,31 +319,11 @@ namespace NatureNetApplication
 
         }
 
-        public void oncursordrop(object sender, DragEventArgs args)
-        {
-
-        }
-
-        private void Images_LibraryItems_DragEnter(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void Images_LibraryItems_Drop(object sender, Microsoft.Surface.Presentation.SurfaceDragDropEventArgs e)
-        {
-            string test = "scuss";
-        }
-
-        private void Images_LibraryItems_PreviewDragEnter(object sender, DragEventArgs e)
-        {
-            string test = "scuss";
-        }
-
-        private void UserControl_PreviewDragEnter(object sender, DragEventArgs e)
-        {
-            string test = "scuss";
-        }
-
+        /// <summary>
+        /// makes sure that no other items except images can crop into a image_view_window by disabling teh drag drop property of teh item.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Images_LibraryItems_DragEnter(object sender, Microsoft.Surface.Presentation.SurfaceDragDropEventArgs e)
         {
             if ((e.Cursor.Data as Image_View_Window) is Image_View_Window)
@@ -346,21 +347,18 @@ namespace NatureNetApplication
             }
 
         }
-
-        private void SurfaceListBoxItem_DragOver(object sender, DragEventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// restores the drag drop property of elemets which are leaving the area of the image_view_window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+       
         private void Images_LibraryItems_DragLeave(object sender, Microsoft.Surface.Presentation.SurfaceDragDropEventArgs e)
         {
             e.Effects = e.Cursor.AllowedEffects;
 
         }
 
-        private void UserControl_DragCompleted(object sender, Microsoft.Surface.Presentation.SurfaceDragCompletedEventArgs e)
-        {
-            ListBoxItem testewer = new ListBoxItem();
-        }
+        
     }
 }

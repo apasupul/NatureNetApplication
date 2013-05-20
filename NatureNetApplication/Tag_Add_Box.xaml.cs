@@ -18,6 +18,7 @@ namespace NatureNetApplication
 {
     /// <summary>
     /// Interaction logic for Tag_Add_Box.xaml
+    /// Currently un used 
     /// </summary>
     public partial class Tag_Add_Box : UserControl
     {

@@ -18,6 +18,7 @@ namespace NatureNetApplication
 {
     /// <summary>
     /// Interaction logic for Content.xaml
+    /// used to process a image dropped on the scatter view 
     /// </summary>
     public partial class Content : UserControl
     {
@@ -27,11 +28,15 @@ namespace NatureNetApplication
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// makes a container for a dropped image and loads it onto it
+        /// </summary>
+        /// <param name="p"></param>
         public Content(object p)
         {
 
             // TODO: Complete member initialization
+            //
             this.p = p;
             InitializeComponent();
             DataContext = this;
@@ -44,6 +49,9 @@ namespace NatureNetApplication
             String name = info.Name;
             var directory = System.IO.Path.GetDirectoryName(p.ToString());
         }
+        /// <summary>
+        /// stores teh sourceuri /// in this case the link to the location of the image on the physical disk
+        /// </summary>
         public string SourceUri
         {
             get
@@ -51,38 +59,15 @@ namespace NatureNetApplication
                 return p.ToString();
             }
         }
+        /// <summary>
+        /// detects a touch on close button and close's the image view window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
-        private void SurfaceButton_TouchDown(object sender, TouchEventArgs e)
-        {
 
-            DependencyObject parent = VisualTreeHelper.GetParent(this);
-            ScatterViewItem svi = null;
-            while (parent as ScatterView == null)
-            {
-                if (parent is ScatterViewItem)
-                    svi = parent as ScatterViewItem;
-                parent = VisualTreeHelper.GetParent(parent);
-            }
 
-            ((ScatterView)parent).Items.Remove(svi);
-
-        }
-
-        private void SurfaceButton_Click(object sender, RoutedEventArgs e)
-        {
-            DependencyObject parent = VisualTreeHelper.GetParent(this);
-            ScatterViewItem svi = null;
-            while (parent as ScatterView == null)
-            {
-                if (parent is ScatterViewItem)
-                    svi = parent as ScatterViewItem;
-                parent = VisualTreeHelper.GetParent(parent);
-            }
-
-            ((ScatterView)parent).Items.Remove(svi);
-        }
-
-        private void SurfaceButton_Click_1(object sender, RoutedEventArgs e)
+        private void Close_window(object sender, RoutedEventArgs e)
         {
 
             DependencyObject parent = VisualTreeHelper.GetParent(this);
