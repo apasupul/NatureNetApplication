@@ -147,13 +147,13 @@ namespace NatureNetApplication
                 if (f.Attributes == FileAttributes.Archive)
                 {
                     string _paren_name = new FileInfo(f.FullName).Directory.Name;
-                    cmd.CommandText = "SELECT  Image_tag_name FROM Image_Map_to_Tags WHERE ( Image_tag_name = N'" + f.Name + "')";
+                    cmd.CommandText = "SELECT  Image_name FROM Image_Map_to_Tags WHERE ( Image_name = N'" + f.Name + "')";
                     _filename_database = cmd.ExecuteScalar();
                     if (_filename_database == null)
                     {
                         _filename_database = "ads";
                     }
-                    cmd.CommandText = "SELECT  image_tag FROM Image_Map_to_Tags WHERE ( Image_tag_name = N'" + f.Name + "')";
+                    cmd.CommandText = "SELECT  image_tag FROM Image_Map_to_Tags WHERE ( Image_name = N'" + f.Name + "')";
                     _Directory_parent = cmd.ExecuteScalar();
                     if (_Directory_parent == null)
                     {
@@ -166,7 +166,7 @@ namespace NatureNetApplication
                     else
                     {
 
-                        cmd.CommandText = "INSERT INTO Image_Map_to_Tags (Image_tag_name, image_tag) VALUES ('" + f.Name + "', '" + _paren_name + "')";
+                        cmd.CommandText = "INSERT INTO Image_Map_to_Tags (Image_name, image_tag) VALUES ('" + f.Name + "', '" + _paren_name + "')";
                         cmd.ExecuteNonQuery();
 
 
@@ -390,11 +390,11 @@ namespace NatureNetApplication
             {
                 double x_position;
                 double y_position;
-                cmd.CommandText = "SELECT x_position FROM PushPin_location WHERE (pin_tag = N'" + i + "')";
+                cmd.CommandText = "SELECT x_position FROM PushPin_location WHERE (pin_ID = N'" + i + "')";
 
 
                 x_position = Convert.ToDouble(cmd.ExecuteScalar());
-                cmd.CommandText = "SELECT y_position FROM PushPin_location WHERE (pin_tag = N'" + i + "')";
+                cmd.CommandText = "SELECT y_position FROM PushPin_location WHERE (pin_ID = N'" + i + "')";
                 y_position = Convert.ToDouble(cmd.ExecuteScalar());
                 MapLayer layer2 = new MapLayer();
 

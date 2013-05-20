@@ -159,14 +159,14 @@ namespace NatureNetApplication
                 conn.Open();
                 object value4 = cmd.ExecuteScalar();
                 int asd = (Convert.ToInt32(value4));
-                cmd.CommandText = "INSERT INTO PushPin_location (x_position, y_position, pin_tag) VALUES ('" + _Latitude + "', '" + _longitude + "', '" + (++asd) + "')";
+                cmd.CommandText = "INSERT INTO PushPin_location (x_position, y_position, pin_ID) VALUES ('" + _Latitude + "', '" + _longitude + "', '" + (++asd) + "')";
                 cmd.ExecuteNonQuery();
                 foreach (String s in Names)
                 {
                     string result;
 
                     result = System.IO.Path.GetFileName(s);
-                    cmd.CommandText = "INSERT INTO Pushpins_to_images (push_number, image_name) VALUES ('" + asd + "', '" + result + "')";
+                    cmd.CommandText = "INSERT INTO Pushpins_to_images (pin_ID, image_name) VALUES ('" + asd + "', '" + result + "')";
                     cmd.ExecuteScalar();
                 }
                 Push_Image_container.Visibility = Visibility.Hidden;
@@ -178,7 +178,7 @@ namespace NatureNetApplication
         {
             e.Effects = DragDropEffects.None;
             return;
-            object neededdata = e.Cursor.Data;
+            //object neededdata = e.Cursor.Data;
             // TODO : ( abhijit ) : process dropped collections to add photos into the pushpin collection
             //Content test = e.Cursor.Data as Content;
             ////test.p = 

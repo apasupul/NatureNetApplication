@@ -27,7 +27,7 @@ namespace NatureNetApplication
     public partial class Image_View_Window : UserControl
     {
         private string item;
-        int local_setter;
+        
         /// <summary>
         ///  collections to store list fo images associated with the current tag/collection name
         /// </summary>
@@ -67,7 +67,7 @@ namespace NatureNetApplication
 
             List<string> photos = new List<string>();
             SqlCeConnection conn = null;
-            string query = "SELECT Image_Database.Image_location FROM Image_Map_to_Tags INNER JOIN Image_Database ON Image_Map_to_Tags.Image_tag_name = Image_Database.Image_name AND Image_Map_to_Tags.image_tag LIKE '" + item + "'";
+            string query = "SELECT Image_Database.Image_location FROM Image_Map_to_Tags INNER JOIN Image_Database ON Image_Map_to_Tags.Image_name = Image_Database.Image_name AND Image_Map_to_Tags.image_tag LIKE '" + item + "'";
             string filesPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NatureNetDataBase_Main.sdf");
             string connectionString = string.Format("Data Source=" + filesPath);
             conn = new SqlCeConnection(connectionString);
@@ -128,7 +128,7 @@ namespace NatureNetApplication
             conn = new SqlCeConnection(connectionString);
             SqlCeCommand cmd = conn.CreateCommand();
             conn.Open();
-            cmd.CommandText = "SELECT Ideas, Tag_name FROM Data_associated_tags WHERE (Tag_name = N'" + item + "')";
+            cmd.CommandText = "SELECT data, Tag_name FROM Data_associated_tags WHERE (Tag_name = N'" + item + "')";
             Databox.Visibility = Visibility.Visible;
             SqlCeDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -214,7 +214,7 @@ namespace NatureNetApplication
                     conn = new SqlCeConnection(connectionString);
                     SqlCeCommand cmd = conn.CreateCommand();
                     conn.Open();
-                    cmd.CommandText = "INSERT INTO Data_associated_tags (Ideas, Tag_name) VALUES ('" + ContributionBox.Text.ToString() + "','" + label1.Content.ToString() + "')";
+                    cmd.CommandText = "INSERT INTO Data_associated_tags (data, Tag_name) VALUES ('" + ContributionBox.Text.ToString() + "','" + label1.Content.ToString() + "')";
                     Databox.Items.Add(ContributionBox.Text.ToString());
                     cmd.ExecuteNonQuery();
                     conn.Close();
@@ -303,7 +303,7 @@ namespace NatureNetApplication
                 {
                     conn.Open();
                     string result = System.IO.Path.GetFileName(s);
-                    cmd.CommandText = "INSERT INTO Image_Map_to_Tags (Image_tag_name, image_tag) VALUES ('" + result + "', '" + label1.Content.ToString() + "')";
+                    cmd.CommandText = "INSERT INTO Image_Map_to_Tags (Image_name, image_tag) VALUES ('" + result + "', '" + label1.Content.ToString() + "')";
                     cmd.ExecuteScalar();
                     conn.Close();
                     Databox.Items.Clear();
@@ -329,7 +329,7 @@ namespace NatureNetApplication
             if ((e.Cursor.Data as Image_View_Window) is Image_View_Window)
             {
                 e.Effects = DragDropEffects.None;
-                string test = "scuss";
+               
             }
             else
             {
@@ -339,7 +339,7 @@ namespace NatureNetApplication
                     if (menu_test.Name == "Default_menu")
                     {
                         e.Effects = DragDropEffects.None;
-                        string test = "scuss";
+                        
                     }
 
                 }

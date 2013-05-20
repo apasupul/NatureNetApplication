@@ -1193,7 +1193,7 @@ namespace NatureNetApplication {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class Image_Map_to_TagsDataTable : global::System.Data.TypedTableBase<Image_Map_to_TagsRow> {
             
-            private global::System.Data.DataColumn columnImage_tag_name;
+            private global::System.Data.DataColumn columnImage_name;
             
             private global::System.Data.DataColumn columnimage_tag;
             
@@ -1232,9 +1232,9 @@ namespace NatureNetApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Image_tag_nameColumn {
+            public global::System.Data.DataColumn Image_nameColumn {
                 get {
-                    return this.columnImage_tag_name;
+                    return this.columnImage_name;
                 }
             }
             
@@ -1283,10 +1283,10 @@ namespace NatureNetApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Image_Map_to_TagsRow AddImage_Map_to_TagsRow(string Image_tag_name, string image_tag) {
+            public Image_Map_to_TagsRow AddImage_Map_to_TagsRow(string Image_name, string image_tag) {
                 Image_Map_to_TagsRow rowImage_Map_to_TagsRow = ((Image_Map_to_TagsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        Image_tag_name,
+                        Image_name,
                         image_tag};
                 rowImage_Map_to_TagsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowImage_Map_to_TagsRow);
@@ -1310,18 +1310,18 @@ namespace NatureNetApplication {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columnImage_tag_name = base.Columns["Image_tag_name"];
+                this.columnImage_name = base.Columns["Image_name"];
                 this.columnimage_tag = base.Columns["image_tag"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnImage_tag_name = new global::System.Data.DataColumn("Image_tag_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnImage_tag_name);
+                this.columnImage_name = new global::System.Data.DataColumn("Image_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImage_name);
                 this.columnimage_tag = new global::System.Data.DataColumn("image_tag", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnimage_tag);
-                this.columnImage_tag_name.MaxLength = 100;
+                this.columnImage_name.MaxLength = 100;
                 this.columnimage_tag.MaxLength = 100;
             }
             
@@ -1913,17 +1913,17 @@ namespace NatureNetApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Image_tag_name {
+            public string Image_name {
                 get {
                     try {
-                        return ((string)(this[this.tableImage_Map_to_Tags.Image_tag_nameColumn]));
+                        return ((string)(this[this.tableImage_Map_to_Tags.Image_nameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Image_tag_name\' in table \'Image_Map_to_Tags\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Image_name\' in table \'Image_Map_to_Tags\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableImage_Map_to_Tags.Image_tag_nameColumn] = value;
+                    this[this.tableImage_Map_to_Tags.Image_nameColumn] = value;
                 }
             }
             
@@ -1945,14 +1945,14 @@ namespace NatureNetApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsImage_tag_nameNull() {
-                return this.IsNull(this.tableImage_Map_to_Tags.Image_tag_nameColumn);
+            public bool IsImage_nameNull() {
+                return this.IsNull(this.tableImage_Map_to_Tags.Image_nameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetImage_tag_nameNull() {
-                this[this.tableImage_Map_to_Tags.Image_tag_nameColumn] = global::System.Convert.DBNull;
+            public void SetImage_nameNull() {
+                this[this.tableImage_Map_to_Tags.Image_nameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3034,15 +3034,15 @@ namespace NatureNetApplication.NatureNetDataBase_MainDataSetTableAdapters {
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "Image_Map_to_Tags";
-            tableMapping.ColumnMappings.Add("Image_tag_name", "Image_tag_name");
+            tableMapping.ColumnMappings.Add("Image_name", "Image_name");
             tableMapping.ColumnMappings.Add("image_tag", "image_tag");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlServerCe.SqlCeCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [Image_Map_to_Tags] ([Image_tag_name], [image_tag]) VALUES (@p1, @p2)" +
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Image_Map_to_Tags] ([Image_name], [image_tag]) VALUES (@p1, @p2)" +
                 "";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@p1", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, true, 0, 0, "Image_tag_name", global::System.Data.DataRowVersion.Current, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@p1", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, true, 0, 0, "Image_name", global::System.Data.DataRowVersion.Current, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@p2", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, true, 0, 0, "image_tag", global::System.Data.DataRowVersion.Current, null));
         }
         
@@ -3059,7 +3059,7 @@ namespace NatureNetApplication.NatureNetDataBase_MainDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlServerCe.SqlCeCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlServerCe.SqlCeCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [Image_tag_name], [image_tag] FROM [Image_Map_to_Tags]";
+            this._commandCollection[0].CommandText = "SELECT [Image_name], [image_tag] FROM [Image_Map_to_Tags]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
