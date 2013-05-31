@@ -32,6 +32,8 @@ namespace NatureNetApplication
         ///  collections to store list fo images associated with the current tag/collection name
         /// </summary>
         private ObservableCollection<String> names;
+        private SurfaceWindow1 surfaceWindow1;
+        private object p;
         public ObservableCollection<String> Names
         {
             get
@@ -100,6 +102,21 @@ namespace NatureNetApplication
             {
                 surfaceButton5.Visibility = Visibility.Visible;
             }
+
+        }
+
+        public Image_View_Window(string item, SurfaceWindow1 surfaceWindow1)
+        {
+            // TODO: Complete member initialization
+            this.item = item;
+            this.surfaceWindow1 = surfaceWindow1;
+        }
+
+        public Image_View_Window(object p)
+        {
+            // TODO: Complete member initialization
+            this.p = p;
+
 
         }
         /// <summary>

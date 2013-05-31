@@ -115,7 +115,7 @@ namespace NatureNetApplication
         
         {
 
-            Thread.Sleep(TimeSpan.FromSeconds(5));
+            
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
                         (ThreadStart)delegate()
                         {
@@ -145,22 +145,24 @@ namespace NatureNetApplication
                         return;
 
                     }
+                    
                     Content test = new Content(droppingCursor.Data);
+                    
 
                     Items.Add(test);
-
+                   
+                    
                     var svi = ItemContainerGenerator.ContainerFromItem(test) as ScatterViewItem;
                     if (svi != null)
                     {
                         svi.Style = (Style)Resources["LibraryContainerInScatterViewItemStyle"];
                         svi.Center = droppingCursor.GetPosition(this);
                         svi.Orientation = droppingCursor.GetOrientation(this);
-                        svi.Height = 300; //((UserControl)droppingCursor.Data).Height;
-                        svi.Width = 300;// ((UserControl)droppingCursor.Data).Width;
-                        svi.MinHeight = 300;
-                        svi.MinWidth = 300;
-                        svi.MaxHeight = 1000;
-                        svi.MaxWidth = 1000;
+                        svi.Height = 550; //((UserControl)droppingCursor.Data).Height;
+                        svi.Width = 652;// ((UserControl)droppingCursor.Data).Width;
+
+                        svi.MaxHeight = 550;
+                        svi.MaxWidth = 652;
                         svi.DataContext = droppingCursor.Data.ToString();
                         svi.Tag = droppingCursor.Data.ToString();
 

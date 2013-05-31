@@ -1,9 +1,10 @@
+using Microsoft.Windows.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
+
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -21,6 +22,8 @@ using Microsoft.Maps.MapControl.WPF;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Threading;
+using System.Windows.Controls;
+
 
 namespace NatureNetApplication
 {
@@ -45,23 +48,10 @@ namespace NatureNetApplication
             
 
             InitializeComponent();
-            ///
-            /// Start seperate thread to load maps, current data from database.
-            /// recently added on 5/18/13 performance an issues unmaped
-            ///
-            Thread t = new Thread(loaddata);
-            t.Start();
-
-        }
-
-        private void loaddata()
-        {
-            ///
-            /// 
-            ///
-            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
-                        (ThreadStart)delegate()
-                        {
+            
+            serach_box.Items.Add("WoodedHillock");
+            serach_box.Items.Add("Patuxent River Park");
+            serach_box.Items.Add("Asip colorado");
             Location thecenter = new Location(38.771317, -76.711307);
             Default_menu.DataContext = this.Default_menu;
             AddWindowAvailabilityHandlers();
@@ -202,6 +192,24 @@ namespace NatureNetApplication
                 }
 
             } conn.Close();
+            ///
+            /// Start seperate thread to load maps, current data from database.
+            /// recently added on 5/18/13 performance an issues unmaped
+            ///
+            //Thread t = new Thread(loaddata);
+            //t.Start();
+
+        }
+
+        private void loaddata()
+        {
+            ///
+            /// 
+            ///
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                        (ThreadStart)delegate()
+                        {
+            
                         }
                           );
 
@@ -293,10 +301,10 @@ namespace NatureNetApplication
         {
 
             string item = ((sender as ListBox).SelectedItem.ToString());
+            Image_View_Window contentset2 = new Image_View_Window(item, this);
             Image_View_Window contentset = new Image_View_Window(item);
             ScatterViewItem tester2 = new ScatterViewItem();
-            contentset.Background = new SolidColorBrush(Colors.Transparent);
-            tester2.Background = new SolidColorBrush(Colors.Transparent);
+           
             tester2.Content = (contentset);
             tester2.Height = 550;
             tester2.Width = 652;
@@ -329,9 +337,10 @@ namespace NatureNetApplication
                 e.Handled = true;
 
                 // Determin the location to place the pushpin at on the map.
-
+               // Center="960,540"
                 //Get the mouse click coordinates
                 TouchPoint touchp = e.GetTouchPoint(this);
+                
                 //Convert the mouse coordinates to a locatoin on the map
                 Location pinLocation = mymap.ViewportPointToLocation(touchp.Position);
 
@@ -454,6 +463,8 @@ namespace NatureNetApplication
             }
 
         }
+
+        
         /// <summary>
         /// Toggles the map size ( minimizes and maximizes it )
         /// </summary>
@@ -461,26 +472,94 @@ namespace NatureNetApplication
         /// <param name="e"></param>
         private void Toggle_map_size(object sender, RoutedEventArgs e)
         {
-            string[] tagInfo = test.Tag.ToString().Split(',');
+            string[] tagInfo = Scatter_map_container.Tag.ToString().Split(',');
 
             if (tagInfo[0] == "off")
             {
-                test.Height = 70;
-                test.Width = 70;
-                test.Tag = "ok,testing";
-                test.Center = new Point(35, 35);
-                minbutton.Margin = new Thickness(0, 0, 0, 0);
+                
+                Scatter_map_container.Tag = "ok,testing";
+                geo_center.RadiusX = 30;
+                geo_center.RadiusY = 30;
+                //minbutton.Margin = new Thickness(0, 0, 0, 0);
 
             }
             else if (tagInfo[0] == "ok")
             {
-                test.Height = 800;
-                test.Width = 800;
-                test.Tag = "off,testing";
-                test.Center = new Point(390, 390);
-                minbutton.Margin = new Thickness(706, 708, 0, 0);
+                //Point ellipsePoint = new Point(960, 540);
+                //Scatter_map_container.Clip = new EllipseGeometry(ellipsePoint, 380, 380);
+                Scatter_map_container.Height = 800;
+                Scatter_map_container.Width = 800;
+                Scatter_map_container.Tag = "off,testing";
+               // Scatter_map_container.Center = new Point(960, 540);
+                geo_center.RadiusY = 380;
+                geo_center.RadiusX = 380;
+                
+               // minbutton.Margin = new Thickness(706, 708, 0, 0);
             }
         }
+
+        private void PieMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            string item = ((sender as PieInTheSky.PieMenuItem).Header.ToString());
+            Image_View_Window contentset2 = new Image_View_Window(item, this);
+            Image_View_Window contentset = new Image_View_Window(item);
+            ScatterViewItem tester2 = new ScatterViewItem();
+
+            tester2.Content = (contentset);
+            tester2.Height = 550;
+            tester2.Width = 652;
+            tester2.CanScale = false;
+            tester2.DataContext = contentset;
+            tester2.IsHitTestVisible = true;
+            tester2.DragEnter += new DragEventHandler(tester2_DragEnter);
+            Myscatterview.Items.Add(tester2);
+
+        }
+
+        private void PieMenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            string item = ((sender as PieInTheSky.PieMenuItem).Tag.ToString());
+            Content test = new Content(item);
+            ScatterViewItem tester2 = new ScatterViewItem();
+
+            tester2.Content = (test);
+            tester2.Height = 550;
+            tester2.Width = 652;
+            tester2.CanScale = false;
+            tester2.DataContext = test;
+            tester2.IsHitTestVisible = true;
+            tester2.DragEnter += new DragEventHandler(tester2_DragEnter);
+            Myscatterview.Items.Add(tester2);
+
+
+        }
+
+        private void serach_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string item = ((sender as ListBox).SelectedItem.ToString());
+            if (item == "Asip colorado")
+            {
+                mymap.Center = new Location(37.935718, -110.301773);
+                mymap.ZoomLevel = 12;
+                
+               
+            }
+            if (item == "WoodedHillock")
+            {
+                mymap.Center = new Location(38.986117, -76.936955);
+                mymap.ZoomLevel = 12;
+
+                
+            }
+            if (item == "Patuxent River Park")
+            {
+                mymap.Center = new Location(38.760426, -76.713747);
+                mymap.ZoomLevel = 12;
+                
+            }
+        }
+
+        
 
 
     }
