@@ -145,10 +145,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NatureNetDataBase_MainDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="NatureNetDataBase_MainDataSet1.cs">
+      <DependentUpon>NatureNetDataBase_MainDataSet1.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="NatureNetDataBase_MainDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NatureNetDataBase_MainDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="NatureNetDataBase_MainDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NatureNetDataBase_MainDataSet2.xsd</DependentUpon>
     </Compile>
     <Compile Include="PushPinControl.xaml.cs">
       <DependentUpon>PushPinControl.xaml</DependentUpon>
@@ -260,6 +269,17 @@
     </None>
     <None Include="NatureNetDataBase_MainDataSet1.xss">
       <DependentUpon>NatureNetDataBase_MainDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="NatureNetDataBase_MainDataSet2.xsc">
+      <DependentUpon>NatureNetDataBase_MainDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="NatureNetDataBase_MainDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>NatureNetDataBase_MainDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NatureNetDataBase_MainDataSet2.xss">
+      <DependentUpon>NatureNetDataBase_MainDataSet2.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

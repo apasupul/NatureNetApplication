@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NatureNetDataBase_MainModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="3.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="NatureNetDataBase_MainModelStoreContainer" />
+        <!--Errors Found During Generation:
+            warning 6013: The table/view 'data_associated_images' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+            
+            <EntityType Name="data_associated_images">
+              <Property Name="data" Type="nvarchar" MaxLength="100" />
+              <Property Name="Image_name" Type="nvarchar" MaxLength="100" />
+            </EntityType>
+            Errors Found During Generation:
+            warning 6013: The table/view 'Data_associated_tags' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+            
+            <EntityType Name="Data_associated_tags">
+              <Property Name="Tag_name" Type="nvarchar" MaxLength="100" />
+              <Property Name="data" Type="nvarchar" MaxLength="100" />
+            </EntityType>
+            Errors Found During Generation:
+            warning 6013: The table/view 'Ideas' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+            
+            <EntityType Name="Ideas">
+              <Property Name="Idea_content" Type="nvarchar" MaxLength="1000" />
+              <Property Name="idea_timestamp" Type="nvarchar" MaxLength="100" />
+              <Property Name="template" Type="nvarchar" MaxLength="100" />
+            </EntityType>
+            Errors Found During Generation:
+            warning 6013: The table/view 'Image_Database' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+            
+            <EntityType Name="Image_Database">
+              <Property Name="Image_name" Type="nvarchar" MaxLength="100" />
+              <Property Name="Image_location" Type="nvarchar" MaxLength="500" />
+            </EntityType>
+            Errors Found During Generation:
+            warning 6013: The table/view 'Image_Map_to_Tags' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+            
+            <EntityType Name="Image_Map_to_Tags">
+              <Property Name="image_tag" Type="nvarchar" MaxLength="100" />
+              <Property Name="Image_name" Type="nvarchar" MaxLength="100" />
+            </EntityType>
+            Errors Found During Generation:
+            warning 6013: The table/view 'PushPin_location' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+            
+            <EntityType Name="PushPin_location">
+              <Property Name="x_position" Type="nvarchar" MaxLength="100" />
+              <Property Name="y_position" Type="nvarchar" MaxLength="100" />
+              <Property Name="pin_ID" Type="nvarchar" MaxLength="100" />
+            </EntityType>
+            Errors Found During Generation:
+            warning 6013: The table/view 'Pushpins_to_images' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+            
+            <EntityType Name="Pushpins_to_images">
+              <Property Name="image_name" Type="nvarchar" MaxLength="100" />
+              <Property Name="pin_ID" Type="nvarchar" MaxLength="100" />
+            </EntityType>
+            Errors Found During Generation:
+            warning 6013: The table/view 'Users_login' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+            
+            <EntityType Name="Users_login">
+              <Property Name="Username" Type="nvarchar" MaxLength="100" />
+              <Property Name="User_id" Type="nvarchar" MaxLength="100" />
+            </EntityType>-->
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NatureNetDataBase_MainModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="NatureNetDataBase_MainEntities" annotation:LazyLoadingEnabled="true" />
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NatureNetDataBase_MainModelStoreContainer" CdmEntityContainer="NatureNetDataBase_MainEntities" />
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1" />
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,9 +1,10 @@
-﻿<s:SurfaceWindow xmlns:my="clr-namespace:Microsoft.Garage.Surface.ModeSelectorSample"  x:Class="NatureNetApplication.SurfaceWindow1"
+﻿<s:SurfaceWindow xmlns:my="clr-namespace:Microsoft.Garage.Surface.ModeSelectorSample" 
+                 x:Class="NatureNetApplication.SurfaceWindow1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:s="http://schemas.microsoft.com/surface/2008"
                   xmlns:p="clr-namespace:PieInTheSky;assembly=PieInTheSky"
-                 xmlns:controls="clr-namespace:Microsoft.Garage.Surface.ModeSelectorSample;assembly=namespace:Microsoft.Garage.Surface.ModeSelectorSample" 
+                 
                  xmlns:Controls="clr-namespace:NatureNetApplication"
     xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
                   xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
@@ -11,49 +12,51 @@
                  Height=" 1080" Width=" 1920" Background="BlanchedAlmond"
     >
     <s:SurfaceWindow.Resources>
-        
+
         <ImageBrush x:Key="button_mini"  Stretch="Fill" ImageSource="Resources/minimize.png"/>
-        
+
     </s:SurfaceWindow.Resources>
     <Grid>
 
         <Controls:DragDropScatterView x:Name="Myscatterview">
-            <s:ScatterViewItem>
+            <!--<s:ScatterViewItem x:Name="testmenu">
                 <my:selector />
-            </s:ScatterViewItem>
-            
-            <s:ScatterViewItem Center="0,0" Height="500" Width="500">
-                
+            </s:ScatterViewItem>-->
+
+            <s:ScatterViewItem Center="0,0" Height="250" Width="250">
+
                 <s:ScatterViewItem.Clip>
-                    <EllipseGeometry RadiusX="250" RadiusY="250" Center="250,250"/>
+                    <EllipseGeometry RadiusX="100" RadiusY="100" Center="100,100"/>
                 </s:ScatterViewItem.Clip>
                 <Grid >
 
 
-                    <p:PieMenu x:Name="Menu1" Panel.ZIndex="1" RotateText="True" Height="500" Width="500"   Radius="70" Margin="125,125,125,125" >
+                    <p:PieMenu x:Name="Menu1" Panel.ZIndex="1" RotateText="True"    >
                         <p:PieMenuItem Header="Map"  >
                             <p:PieMenuItem Header="Mode" Click="togglemap_Click" >
-                                
-                               
-                                
                             </p:PieMenuItem>
                             <p:PieMenuItem Header="Pushpin" Tag="isdisabled" x:Name="Drop_controler" Click="Drop_pin"  />
                             <p:PieMenuItem Header="Minimize" Click="Toggle_map_size" />
                         </p:PieMenuItem>
                         <p:PieMenuItem Header="Data" x:Name="data_menu">
-                            <p:PieMenuItem Header="WoodedHillock" Click="PieMenuItem_Click" />
-                            <p:PieMenuItem Header="Image" Click="PieMenuItem_Click_1" Tag="C:\Users\Killerdomon\Desktop\NatureNetApplication\NatureNetApplication\bin\Debug\Resources\WoodedHillock\2013-04-02 02.40.57.jpg" />
-                            <p:PieMenuItem Header="maks.berger@yahoo.com" Click="PieMenuItem_Click" />
+                            <p:PieMenuItem Header="Collection" Click="launch_data_collection" />
+                            <p:PieMenuItem Header="Photos" Click="launch_data_photo" />
+                            <p:PieMenuItem Header="People"  />
                         </p:PieMenuItem>
                         <p:PieMenuItem Header="Design" x:Name="Design_menu">
-                            <p:PieMenuItem Header="Image" Click="PieMenuItem_Click_1" Tag="C:\Users\Killerdomon\Desktop\NatureNetApplication\NatureNetApplication\bin\Debug\Resources\WoodedHillock\2013-04-02 02.41.38.jpg" />
-                            <p:PieMenuItem Header="Image"  Click="PieMenuItem_Click_1" Tag="C:\Users\Killerdomon\Desktop\NatureNetApplication\NatureNetApplication\bin\Debug\Resources\bamboo32@comcast.net\2013-04-02 01.53.04.jpg"/>
-                            <p:PieMenuItem Header="chammer7@terpmail.umd.edu" Click="PieMenuItem_Click"/>
-                            <p:PieMenuItem Header="mahill104@gmail.com" Click="PieMenuItem_Click"/>
+                            <p:PieMenuItem Header="Collection"  Click="launch_data_collection" />
+                            <p:PieMenuItem Header="Photo" Click="launch_data_photo" />
+                            <p:PieMenuItem Header="Map" />
+                        </p:PieMenuItem>
+                        <p:PieMenuItem Header="Surprise" >
+                            <p:PieMenuItem Header=" local Videos"/>
+                            <p:PieMenuItem Header=" youtube Videos"/>
+                            
                         </p:PieMenuItem>
                     </p:PieMenu>
                 </Grid>
             </s:ScatterViewItem>
+            
             <s:ScatterViewItem AllowDrop="False" x:Name="Scatter_map_container" Height="800" Width="800" ZIndex="0" Center="960,540" Orientation="0"   BorderThickness="10" CanMove="False" CanRotate="False" CanScale="False" Tag="off,testing">
                 <s:ScatterViewItem.Clip>
                     <EllipseGeometry x:Name="geo_center" RadiusX="380" RadiusY="380" Center="390,390"/>
@@ -105,13 +108,29 @@
             </s:ScatterViewItem>
             <s:ScatterViewItem Height="100" Width="600">
                 <Grid>
-                    <s:SurfaceListBox x:Name="serach_box" AllowDrop="False" Height="50" HorizontalAlignment="Left" Margin="12,30,0,0"  VerticalAlignment="Top" Width="430" SelectionChanged="serach_box_SelectionChanged">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="383*" />
+                        <ColumnDefinition Width="110*" />
+                        <ColumnDefinition Width="107*" />
+                    </Grid.ColumnDefinitions>
+                    <s:SurfaceTextBox Visibility="Hidden" x:Name="_enter_search">
                         
+                    </s:SurfaceTextBox>
+                    <s:SurfaceListBox x:Name="serach_box" AllowDrop="False" Height="50" HorizontalAlignment="Left" Margin="12,30,0,0"  VerticalAlignment="Top" Width="430" SelectionChanged="serach_box_SelectionChanged" Grid.ColumnSpan="2">
+
 
                     </s:SurfaceListBox>
+                    <my:ModeSelector Grid.Column="2" x:Name="Newstff" Grid.Row="1" HorizontalAlignment="Left"
+                           Style="{StaticResource SelectorStyle}"
+                           Width="100" MinWidth="100" MaxWidth="100" 
+                           SelectedIndex="0" MaxHeight="200"
+                           HorizontalContentAlignment="Left"
+                           Height="50" IsEnabled="True" SelectionChanged="Newstff_SelectionChanged">
 
+
+                    </my:ModeSelector>
                     <!--<s:SurfaceListBox  x:Name="serach_box" AllowDrop="False" Height="23" HorizontalAlignment="Left" Margin="12,30,0,0"  VerticalAlignment="Top" Width="430" />-->
-                    <s:SurfaceButton AllowDrop="False" Content="Search" Height="23" HorizontalAlignment="Left" Margin="460,30,0,0" Name="searchbutton" VerticalAlignment="Top" Width="75" Click="togglemap_Click" />
+                    <s:SurfaceButton Grid.Column="1" AllowDrop="False" Content="Search" Height="42" HorizontalAlignment="Left" Name="searchbutton" VerticalAlignment="Top" Width="77" Click="togglemap_Click" Margin="16,32,0,0" />
                 </Grid>
             </s:ScatterViewItem>
             <!--<s:ElementMenu HorizontalAlignment="Left" Name="elementMenu1" VerticalAlignment="Top" >

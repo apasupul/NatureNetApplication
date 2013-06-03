@@ -184,7 +184,7 @@ namespace NatureNetApplication
             conn = new SqlCeConnection(connectionString);
             SqlCeCommand cmd = conn.CreateCommand();
             conn.Open();
-            cmd.CommandText = "SELECT Idea_content FROM Ideas";
+            cmd.CommandText = "SELECT Idea_content FROM Ideas WHERE (template = N'Image Collections')";
 
             SqlCeDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -231,7 +231,7 @@ namespace NatureNetApplication
                     conn = new SqlCeConnection(connectionString);
                     SqlCeCommand cmd = conn.CreateCommand();
                     conn.Open();
-                    cmd.CommandText = "INSERT INTO Data_associated_tags (data, Tag_name) VALUES ('" + ContributionBox.Text.ToString() + "','" + label1.Content.ToString() + "')";
+                    cmd.CommandText = "INSERT INTO Data_associated_tags (data, Tag_name,Tag_data_timestamp) VALUES ('" + ContributionBox.Text.ToString() + "','" + label1.Content.ToString() + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "')";
                     Databox.Items.Add(ContributionBox.Text.ToString());
                     cmd.ExecuteNonQuery();
                     conn.Close();
@@ -255,7 +255,7 @@ namespace NatureNetApplication
                         conn = new SqlCeConnection(connectionString);
                         SqlCeCommand cmd = conn.CreateCommand();
                         conn.Open();
-                        cmd.CommandText = "INSERT INTO Ideas (Idea_content) VALUES ('" + ContributionBox.Text.ToString() + "')";
+                        cmd.CommandText = "INSERT INTO Ideas (Idea_content,idea_timestamp,template) VALUES ('" + ContributionBox.Text.ToString() + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "','Image Collections'" + ")";
                         Databox.Items.Add(ContributionBox.Text.ToString());
                         cmd.ExecuteNonQuery();
                         conn.Close();

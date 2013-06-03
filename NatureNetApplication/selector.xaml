@@ -19,7 +19,7 @@
                                VerticalAlignment="Center"/>
                 <!-- Below is the definition for the Mode Selector control -->
                 <controls:ModeSelector 
-                           x:Name="_ModeSelector" x:FieldModifier="private"
+                           x:Name="_ModeSelector" 
                            Grid.Row="1" HorizontalAlignment="Left"
                            Style="{StaticResource SelectorStyle}"
                            Width="292" MinWidth="242" MaxWidth="292" 

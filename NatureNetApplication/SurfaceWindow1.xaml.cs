@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
-
+using Microsoft.Garage.Surface.ModeSelectorSample;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -51,13 +51,31 @@ namespace NatureNetApplication
             
             serach_box.Items.Add("WoodedHillock");
             serach_box.Items.Add("Patuxent River Park");
-            serach_box.Items.Add("Asip colorado");
+            serach_box.Items.Add("Aspen Colorado");
             Location thecenter = new Location(38.771317, -76.711307);
             Default_menu.DataContext = this.Default_menu;
             AddWindowAvailabilityHandlers();
             mymap.UseInertia = true;
+            //Newstff.Initialized += new EventHandler<InitializingNewItemEventArgs>(Newstff_Initialized);
             mymap.ViewChangeOnFrame += new EventHandler<MapEventArgs>(mymap_ViewChangeOnFrame);
+            ModeSelector testmode = new ModeSelector();
 
+            Newstff.ItemsSource = new string[]
+                                            {
+                                                "Maps",
+                                                "People",
+                                                "Collections",
+                                                "Bio-Diversity Data",
+                                                
+                                            };
+            
+
+            testmode.SelectionChanged += ModeSelectorSelectionChanged;
+            ScatterViewItem svi = new ScatterViewItem();
+            svi.Content = testmode;
+           // Myscatterview.Items.Add(svi);
+            
+            
             mymap.AnimationLevel = AnimationLevel.Full;
             ///
             ///
@@ -201,6 +219,11 @@ namespace NatureNetApplication
 
         }
 
+       
+        void ModeSelectorSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
         private void loaddata()
         {
             ///
@@ -497,10 +520,119 @@ namespace NatureNetApplication
                // minbutton.Margin = new Thickness(706, 708, 0, 0);
             }
         }
-
-        private void PieMenuItem_Click(object sender, RoutedEventArgs e)
+        private void launch_design_collection(object sender, RoutedEventArgs e)
+        
         {
-            string item = ((sender as PieInTheSky.PieMenuItem).Header.ToString());
+            int Usercount;
+            SqlCeConnection conn = null;
+            string filesPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NatureNetDataBase_Main.sdf");
+            string connectionString = string.Format("Data Source=" + filesPath);
+            conn = new SqlCeConnection(connectionString);
+            SqlCeCommand cmd = conn.CreateCommand();
+            conn.Open();
+            cmd.CommandText = "SELECT        COUNT(*) AS NumberOfOrders FROM            Ideas WHERE        (template = N'Image Collections')";
+            object value = cmd.ExecuteScalar();
+
+            conn.Close();
+            if (value == DBNull.Value)
+            {
+                Usercount = 0;
+            }
+            else
+            {
+                _loginnamecounter = Convert.ToInt32(value);
+                Usercount = Convert.ToInt32(value.ToString());
+            }
+
+            List<string> alldatatags = new List<string>();
+            /*
+            * Add Username tags from Database into tagbox
+            */
+            if (Usercount > 1)
+            {
+
+                conn.Open();
+                cmd.CommandText = "SELECT        Idea_content FROM            Ideas WHERE        (template = N'Image Collections')";
+                SqlCeDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    alldatatags.Add(reader.GetString(0));
+                }
+                conn.Close();
+
+
+
+            }
+            else return;
+
+            Random rnd = new Random();
+            int r = rnd.Next(alldatatags.Count);
+
+
+            string item = (string)alldatatags[r];
+            Image_View_Window contentset2 = new Image_View_Window(item, this);
+            Image_View_Window contentset = new Image_View_Window(item);
+            ScatterViewItem tester2 = new ScatterViewItem();
+
+            tester2.Content = (contentset);
+            tester2.Height = 550;
+            tester2.Width = 652;
+            tester2.CanScale = false;
+            tester2.DataContext = contentset;
+            tester2.IsHitTestVisible = true;
+            tester2.DragEnter += new DragEventHandler(tester2_DragEnter);
+            Myscatterview.Items.Add(tester2);
+ 
+        }
+        private void launch_data_collection(object sender, RoutedEventArgs e)
+        {
+            int Usercount;
+              SqlCeConnection conn = null;
+            string filesPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NatureNetDataBase_Main.sdf");
+            string connectionString = string.Format("Data Source=" + filesPath);
+            conn = new SqlCeConnection(connectionString);
+            SqlCeCommand cmd = conn.CreateCommand();
+            conn.Open();
+            cmd.CommandText = "SELECT        COUNT(*) AS NumberOfOrders FROM            Data_associated_tags WHERE        (Tag_data_timestamp <> ' ')";
+            object value = cmd.ExecuteScalar();
+
+            conn.Close();
+           if (value == DBNull.Value)
+            {
+                Usercount = 0;
+            }
+            else
+            {
+                _loginnamecounter = Convert.ToInt32(value);
+                Usercount = Convert.ToInt32(value.ToString());
+            }
+
+           List<string> alldatatags = new List<string>();
+            /*
+            * Add Username tags from Database into tagbox
+            */
+           if (Usercount > 1)
+           {
+
+               conn.Open();
+               cmd.CommandText = "SELECT        Tag_name FROM            Data_associated_tags WHERE        (Tag_data_timestamp <> ' ')";
+               SqlCeDataReader reader = cmd.ExecuteReader();
+               while (reader.Read())
+               {
+                   alldatatags.Add(reader.GetString(0));
+               }
+               conn.Close();
+
+
+
+           }
+           else return;
+
+            Random rnd = new Random();
+            int r = rnd.Next(alldatatags.Count);
+
+
+            string item = (string)alldatatags[r];
             Image_View_Window contentset2 = new Image_View_Window(item, this);
             Image_View_Window contentset = new Image_View_Window(item);
             ScatterViewItem tester2 = new ScatterViewItem();
@@ -515,10 +647,138 @@ namespace NatureNetApplication
             Myscatterview.Items.Add(tester2);
 
         }
-
-        private void PieMenuItem_Click_1(object sender, RoutedEventArgs e)
+        private void launch_design_photo(object sender, RoutedEventArgs e)
         {
-            string item = ((sender as PieInTheSky.PieMenuItem).Tag.ToString());
+             int Usercount;
+            SqlCeConnection conn = null;
+            string filesPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NatureNetDataBase_Main.sdf");
+            string connectionString = string.Format("Data Source=" + filesPath);
+            conn = new SqlCeConnection(connectionString);
+            SqlCeCommand cmd = conn.CreateCommand();
+            conn.Open();
+            cmd.CommandText = "SELECT        COUNT(*) AS NumberOfOrders FROM           Ideas WHERE        (template = N'Images')";
+            object value = cmd.ExecuteScalar();
+
+            conn.Close();
+            if (value == DBNull.Value)
+            {
+                Usercount = 0;
+            }
+            else
+            {
+                _loginnamecounter = Convert.ToInt32(value);
+                Usercount = Convert.ToInt32(value.ToString());
+            }
+
+            List<string> alldatatags = new List<string>();
+            /*
+            * Add Username tags from Database into tagbox
+            */
+            if (Usercount > 1)
+            {
+
+                conn.Open();
+                cmd.CommandText = "SELECT        Idea_content FROM            Ideas WHERE        (template = N'Images')";
+                SqlCeDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    alldatatags.Add(reader.GetString(0));
+                }
+                conn.Close();
+
+
+
+            }
+            else return;
+
+            Random rnd = new Random();
+            int r = rnd.Next(alldatatags.Count);
+
+
+            string item = (string)alldatatags[r];
+            Content test = new Content(item);
+            ScatterViewItem tester2 = new ScatterViewItem();
+
+            tester2.Content = (test);
+            tester2.Height = 550;
+            tester2.Width = 652;
+            tester2.CanScale = false;
+            tester2.DataContext = test;
+            tester2.IsHitTestVisible = true;
+            tester2.DragEnter += new DragEventHandler(tester2_DragEnter);
+            Myscatterview.Items.Add(tester2);
+
+        }
+        private void launch_data_photo(object sender, RoutedEventArgs e)
+        {
+            int Usercount;
+            SqlCeConnection conn = null;
+            string filesPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NatureNetDataBase_Main.sdf");
+            string connectionString = string.Format("Data Source=" + filesPath);
+            conn = new SqlCeConnection(connectionString);
+            SqlCeCommand cmd = conn.CreateCommand();
+            conn.Open();
+            cmd.CommandText = "SELECT        COUNT(*) AS NumberOfOrders FROM            data_associated_images WHERE        (image_data_timestamp <> ' ')";
+            object value = cmd.ExecuteScalar();
+
+            conn.Close();
+            if (value == DBNull.Value)
+            {
+                Usercount = 0;
+            }
+            else
+            {
+                _loginnamecounter = Convert.ToInt32(value);
+                Usercount = Convert.ToInt32(value.ToString());
+            }
+
+            List<string> alldatatags = new List<string>();
+            List<string> listofimagelocations = new List<string>();
+            /*
+            * Add Username tags from Database into tagbox
+            */
+            if (Usercount >= 1)
+            {
+
+                conn.Open();
+                cmd.CommandText = "SELECT        Image_name FROM            data_associated_images WHERE        (image_data_timestamp <> ' ')";
+                SqlCeDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    alldatatags.Add(reader.GetString(0));
+                }
+                conn.Close();
+
+
+
+            }
+            else return;
+
+            Random rnd = new Random();
+            int r = rnd.Next(alldatatags.Count);
+            string selected = (string)alldatatags[r];
+
+            conn.Open();
+            cmd.CommandText = "SELECT        Image_location FROM            Image_Database WHERE        (Image_name = N'"+selected+"')";
+            SqlCeDataReader reader2 = cmd.ExecuteReader();
+            while (reader2.Read())
+            {
+                listofimagelocations.Add(reader2.GetString(0));
+            }
+            conn.Close();
+            string item="";
+            foreach (String s in listofimagelocations) 
+            {
+                if (File.Exists(s))
+                {
+                     item = s;
+
+                }
+              
+
+            }
+            if (item == "")
+            { return; }
             Content test = new Content(item);
             ScatterViewItem tester2 = new ScatterViewItem();
 
@@ -559,8 +819,45 @@ namespace NatureNetApplication
             }
         }
 
-        
+        private void Newstff_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox source = e.OriginalSource as ListBox;
+            if (source != null)
+            {
+               String _Results = source.SelectedItem.ToString() ;
+               switch (_Results)
+               {
+                   case  "Maps":
+                      
+                        _enter_search.Visibility = System.Windows.Visibility.Hidden;
+                       serach_box.Visibility = System.Windows.Visibility.Visible;
+                       break;
+                                                
+                   case    "People":
+                        _enter_search.Visibility = System.Windows.Visibility.Visible;
+                       serach_box.Visibility = System.Windows.Visibility.Hidden;
+
+                       
+                       break;
+                   case "Collections":
+                        _enter_search.Visibility = System.Windows.Visibility.Visible;
+                       serach_box.Visibility = System.Windows.Visibility.Hidden;
+                       break;
+                   case "Bio-Diversity Data":
+                       _enter_search.Visibility = System.Windows.Visibility.Visible;
+                       serach_box.Visibility = System.Windows.Visibility.Hidden;
+                       break;
 
 
+               }
+            }
+
+        }
+
+
+
+
+
+       
     }
 }
