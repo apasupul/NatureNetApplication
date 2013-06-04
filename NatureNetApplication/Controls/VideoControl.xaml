@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="VideoStream.UI.Controls.VideoControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:s="http://schemas.microsoft.com/surface/2008"
+             xmlns:ani="clr-namespace:SoftwareLab.Animations;assembly=SoftwareLab.Animations"
+             xmlns:Controls="clr-namespace:FluidKit.Controls;assembly=FluidKit"
+             xmlns:uc="clr-namespace:VideoStream.UI.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="225" d:DesignWidth="400"
+             
+             xmlns:Wpf="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf">
+    <UserControl.Resources>
+        <!--<Controls:FlipTransition x:Key="FlipTransition" />-->
+        <Storyboard x:Key="gridIn">
+            <ani:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="MenuRow" Storyboard.TargetProperty="Height" From="50" To="0"></ani:GridLengthAnimation>
+        </Storyboard>
+        <Storyboard x:Key="gridOut">
+            <ani:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="MenuRow" Storyboard.TargetProperty="Height" From="0" To="50"></ani:GridLengthAnimation>
+        </Storyboard>
+        <Storyboard x:Key="ButtonRotationExpand">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ExpandButton">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="-90.00"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ButtonRotationCollapse">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ExpandButton">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0.00"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid Background="{DynamicResource ThemeBrush}" Name="contentGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0" x:Name="MenuRow" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="16*" />
+            <ColumnDefinition Width="50" />
+        </Grid.ColumnDefinitions>
+        <s:SurfaceButton Grid.Row="0" Grid.RowSpan="2"  Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" Width="40" Panel.ZIndex="1" HorizontalAlignment="Center" Name="btnClose" PreviewTouchDown="btnClose_Event" Click="btnClose_Event" Style="{DynamicResource CloseButtonStyle}" >close</s:SurfaceButton>
+        <Grid Name="containerGrid" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="16*" />
+                <ColumnDefinition Width="50" />
+            </Grid.ColumnDefinitions>
+            <Image Source="{Binding ElementName=myVlcControl, Path=VideoSource}" Stretch="Fill" Grid.Row="0" Grid.RowSpan="2"  Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Wpf:VlcControl x:Name="myVlcControl" Grid.Row="0" Grid.RowSpan="2"  Grid.Column="0" Grid.ColumnSpan="2"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0" x:Name="MediaControls" Width="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="4*" />
+            </Grid.ColumnDefinitions>
+
+            <s:SurfaceButton Visibility="Hidden" x:Name="PlayButton" Grid.Column="0" x:FieldModifier="private" Style="{DynamicResource PlayButtonStyle}" VerticalAlignment="Center" PreviewTouchDown="PlayButton_Down" Click="PlayButton_Down"/>
+            <s:SurfaceButton x:Name="PauseButton" Grid.Column="0" x:FieldModifier="private" Style="{DynamicResource PauseButtonStyle}" VerticalAlignment="Center" PreviewTouchDown="PauseButton_Down" Click="PauseButton_Down" />
+            <s:SurfaceButton x:Name="MuteButton" Grid.Column="1" Style="{DynamicResource MuteButtonStyle}" HorizontalAlignment="Center" PreviewTouchDown="MuteButton_Down" Click="MuteButton_Down"/>
+            <s:SurfaceButton Visibility="Hidden" x:Name="UnMuteButton" Grid.Column="1" Style="{DynamicResource UnMuteButtonStyle}" HorizontalAlignment="Right" PreviewTouchDown="UnMuteButton_Down" Click="UnMuteButton_Down"/>
+
+        </Grid>
+        <s:SurfaceButton x:Name="ExpandButton" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Style="{DynamicResource FrontFlipButtonStyle}" 
+            VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="ExpandButton_Click" PreviewTouchDown="ExpandButton_PreviewTouchDown" RenderTransformOrigin="0.5,0.5" Background="{DynamicResource ThemeBrush}" >
+            <s:SurfaceButton.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </s:SurfaceButton.RenderTransform>
+        </s:SurfaceButton>
+    </Grid>
+</UserControl>

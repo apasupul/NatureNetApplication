@@ -3,6 +3,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:s="http://schemas.microsoft.com/surface/2008"
+                  xmlns:u="clr-namespace:VideoStream.UI.Controls"
+                 s:TouchVisualizer.VisualizationColor1="{DynamicResource ThemeColor}"
+    s:TouchVisualizer.VisualizationColor2="{DynamicResource ThemeColor}"
+    s:TouchVisualizer.VisualizationColor3="{DynamicResource ThemeColor}" 
                   xmlns:p="clr-namespace:PieInTheSky;assembly=PieInTheSky"
                  
                  xmlns:Controls="clr-namespace:NatureNetApplication"
@@ -22,8 +26,10 @@
             <!--<s:ScatterViewItem x:Name="testmenu">
                 <my:selector />
             </s:ScatterViewItem>-->
-
-            <s:ScatterViewItem Center="0,0" Height="250" Width="250">
+            <s:ScatterViewItem>
+                <u:MainControl x:Name="mainControl"/>a
+            </s:ScatterViewItem>
+                <s:ScatterViewItem Center="0,0" Height="250" Width="250">
 
                 <s:ScatterViewItem.Clip>
                     <EllipseGeometry RadiusX="100" RadiusY="100" Center="100,100"/>

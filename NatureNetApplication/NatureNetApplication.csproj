@@ -49,8 +49,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluidKit">
+      <HintPath>..\..\Pixelsens eprojects\Vido Streamer\C#\SharedComponents\FluidKit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Maps.MapControl.WPF">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Bing Maps WPF Control\V1\Libraries\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism">
+      <HintPath>..\..\Pixelsens eprojects\Vido Streamer\C#\SharedComponents\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Interactivity">
+      <HintPath>..\..\Pixelsens eprojects\Vido Streamer\C#\SharedComponents\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\Pixelsens eprojects\Vido Streamer\C#\SharedComponents\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Surface.Presentation.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Pixelsens eprojects\Vido Streamer\C#\SoftwareLab.Components\bin\Debug\Microsoft.Surface.Presentation.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Design.Extensibility, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Pixelsens eprojects\Vido Streamer\C#\SoftwareLab.Components\bin\Debug\Microsoft.Windows.Design.Extensibility.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Design.Interaction, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Pixelsens eprojects\Vido Streamer\C#\SoftwareLab.Components\bin\Debug\Microsoft.Windows.Design.Interaction.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -107,6 +131,15 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Vlc.DotNet.Core">
+      <HintPath>..\..\Pixelsens eprojects\Vido Streamer\C#\SharedComponents\Vlc.DotNet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Vlc.DotNet.Core.Interops">
+      <HintPath>..\..\Pixelsens eprojects\Vido Streamer\C#\SharedComponents\Vlc.DotNet.Core.Interops.dll</HintPath>
+    </Reference>
+    <Reference Include="Vlc.DotNet.Wpf">
+      <HintPath>..\..\Pixelsens eprojects\Vido Streamer\C#\SharedComponents\Vlc.DotNet.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -130,10 +163,27 @@
     <Compile Include="Content.xaml.cs">
       <DependentUpon>Content.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BackgroundControl.xaml.cs">
+      <DependentUpon>BackgroundControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DragDropScatterView.cs" />
+    <Compile Include="Controls\MainControl.xaml.cs">
+      <DependentUpon>MainControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchControl.xaml.cs">
+      <DependentUpon>SearchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchResultControl.xaml.cs">
+      <DependentUpon>SearchResultControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VideoControl.xaml.cs">
+      <DependentUpon>VideoControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DragDropScatterView.cs" />
     <Compile Include="Errorbox.xaml.cs">
       <DependentUpon>Errorbox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Events\SearchEvent.cs" />
     <Compile Include="Images_dropBox.xaml.cs">
       <DependentUpon>Images_dropBox.xaml</DependentUpon>
     </Compile>
@@ -179,6 +229,26 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\BackgroundControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MainControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SearchControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SearchResultControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\VideoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dictionary1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -207,6 +277,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Resource Include="Styles\LibraryDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Styles\Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Page Include="SurfaceWindow1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -288,16 +366,22 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Youubealt.png" />
+    <Resource Include="WindowsMediaPlayer.png" />
+    <Resource Include="defaultbackground.png" />
     <Content Include="NatureNetDataBase_Main.sdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\minimize.png" />
+    <Resource Include="Resources\defaultbackground.png" />
     <Content Include="Resources\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="NatureNetApplication.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\WindowsMediaPlayer.png" />
+    <Resource Include="Resources\Youubealt.png" />
     <Content Include="System.Data.SqlServerCe.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -336,6 +420,22 @@
     <ProjectReference Include="..\..\..\Downloads\Compressed\PieMenu\PieInTheSky\PieInTheSky.csproj">
       <Project>{7D3ACC77-E27D-402D-AFE4-E8BB36A0956B}</Project>
       <Name>PieInTheSky</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Pixelsens eprojects\Vido Streamer\C#\SoftwareLab.Animations\SoftwareLab.Animations.csproj">
+      <Project>{4D6064E9-FA71-4AFE-9D11-A3EB837C4533}</Project>
+      <Name>SoftwareLab.Animations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Pixelsens eprojects\Vido Streamer\C#\SoftwareLab.Components\SoftwareLab.Components.csproj">
+      <Project>{5F96650D-B345-41CF-8FBB-958EA42DC048}</Project>
+      <Name>SoftwareLab.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Pixelsens eprojects\Vido Streamer\C#\SoftwareLab.Sys\SoftwareLab.Sys.csproj">
+      <Project>{0AA03549-0613-44BF-AFC0-E8AFFE645C1B}</Project>
+      <Name>SoftwareLab.Sys</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Pixelsens eprojects\Vido Streamer\C#\VideoStream.UI\VideoStream.UI.csproj">
+      <Project>{C73372EC-E586-4B11-8546-FB587EF45EB1}</Project>
+      <Name>VideoStream.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

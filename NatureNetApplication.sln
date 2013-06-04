@@ -5,6 +5,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NatureNetApplication", "Nat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PieInTheSky", "..\..\Downloads\Compressed\PieMenu\PieInTheSky\PieInTheSky.csproj", "{7D3ACC77-E27D-402D-AFE4-E8BB36A0956B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareLab.Sys", "..\Pixelsens eprojects\Vido Streamer\C#\SoftwareLab.Sys\SoftwareLab.Sys.csproj", "{0AA03549-0613-44BF-AFC0-E8AFFE645C1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareLab.Components", "..\Pixelsens eprojects\Vido Streamer\C#\SoftwareLab.Components\SoftwareLab.Components.csproj", "{5F96650D-B345-41CF-8FBB-958EA42DC048}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareLab.Animations", "..\Pixelsens eprojects\Vido Streamer\C#\SoftwareLab.Animations\SoftwareLab.Animations.csproj", "{4D6064E9-FA71-4AFE-9D11-A3EB837C4533}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStream.UI", "..\Pixelsens eprojects\Vido Streamer\C#\VideoStream.UI\VideoStream.UI.csproj", "{C73372EC-E586-4B11-8546-FB587EF45EB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +27,22 @@ Global
 		{7D3ACC77-E27D-402D-AFE4-E8BB36A0956B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D3ACC77-E27D-402D-AFE4-E8BB36A0956B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D3ACC77-E27D-402D-AFE4-E8BB36A0956B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AA03549-0613-44BF-AFC0-E8AFFE645C1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AA03549-0613-44BF-AFC0-E8AFFE645C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AA03549-0613-44BF-AFC0-E8AFFE645C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AA03549-0613-44BF-AFC0-E8AFFE645C1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F96650D-B345-41CF-8FBB-958EA42DC048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F96650D-B345-41CF-8FBB-958EA42DC048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F96650D-B345-41CF-8FBB-958EA42DC048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F96650D-B345-41CF-8FBB-958EA42DC048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D6064E9-FA71-4AFE-9D11-A3EB837C4533}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D6064E9-FA71-4AFE-9D11-A3EB837C4533}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D6064E9-FA71-4AFE-9D11-A3EB837C4533}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D6064E9-FA71-4AFE-9D11-A3EB837C4533}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C73372EC-E586-4B11-8546-FB587EF45EB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C73372EC-E586-4B11-8546-FB587EF45EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C73372EC-E586-4B11-8546-FB587EF45EB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C73372EC-E586-4B11-8546-FB587EF45EB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

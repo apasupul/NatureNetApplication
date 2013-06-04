@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="VideoStream.UI.Controls.SearchResultControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:s="http://schemas.microsoft.com/surface/2008"
+             xmlns:t="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:c="clr-namespace:VideoStream.UI.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <!-- A template describing the view of each piece of library data -->
+        <DataTemplate x:Key="LibraryItemTemplate">
+            <Viewbox Stretch="Uniform" >
+                <Image Source="{Binding ThumbNailUrl}" />
+            </Viewbox>
+        </DataTemplate>
+
+        <!-- Styles to ensure each library control uses the above defined templates -->
+        <Style TargetType="{x:Type s:LibraryStack}">
+            <Setter Property="ItemTemplate" Value="{StaticResource LibraryItemTemplate}"/>
+            <Setter Property="Background" Value="{DynamicResource ThemeBrush}" />
+        </Style>
+        <Style TargetType="{x:Type s:LibraryBar}">
+            <Setter Property="ItemTemplate" Value="{StaticResource LibraryItemTemplate}"/>
+            <Setter Property="Background" Value="{DynamicResource ThemeBrush}" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <s:SurfaceButton VerticalAlignment="Top" Width="40" Panel.ZIndex="1" HorizontalAlignment="Center" Name="btnClose" PreviewTouchDown="btnClose_Event" Click="btnClose_Event" Style="{DynamicResource CloseButtonStyle}" >close</s:SurfaceButton>
+        <s:LibraryContainer Name="container" AllowDrop="True" ItemsSource="{Binding}" Background="{DynamicResource ThemeBrush}" >
+            <s:LibraryContainer.StackView>
+                <s:StackView ItemTemplate="{StaticResource LibraryItemTemplate}" />
+            </s:LibraryContainer.StackView>
+            <s:LibraryContainer.BarView >
+                <s:BarView ItemTemplate="{StaticResource LibraryItemTemplate}" Rows="2" />
+            </s:LibraryContainer.BarView>
+        </s:LibraryContainer>
+    </Grid>
+</UserControl>
